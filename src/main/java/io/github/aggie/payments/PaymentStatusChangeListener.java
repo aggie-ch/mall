@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Log
-public class PaymentStatusChangedListener {
+public class PaymentStatusChangeListener {
 
     @Async
     @EventListener

@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository usersRepository;
+    private final UsersRepository usersRepository;
+    private final UserMapper userMapper;
 
     public User add(User user) {
         return usersRepository.save(user);
@@ -20,8 +21,19 @@ public class UserService {
                 .orElseThrow(UserNotFoundException::new);
     }
 
+    public void update(User user) {
+        var userToUpdate = getById(user.getId());
+        userMapper.updateUser(user, userToUpdate);
+        usersRepository.saveAndFlush(userToUpdate);
+    }
+
     public PagedResult<User> getByLastName(String lastNameFragment, int pageNumber, int pageSize) {
         var userPage = usersRepository.findByLastNameContaining(lastNameFragment, PageRequest.of(pageNumber, pageSize));
+        return new PagedResult<>(userPage.getContent(), pageNumber, userPage.getTotalPages());
+    }
+
+    public PagedResult<User> getAll(int pageNumber, int pageSize) {
+        var userPage = usersRepository.findAll(PageRequest.of(pageNumber, pageSize));
         return new PagedResult<>(userPage.getContent(), pageNumber, userPage.getTotalPages());
     }
 }

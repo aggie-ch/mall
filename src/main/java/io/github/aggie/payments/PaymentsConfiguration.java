@@ -22,4 +22,9 @@ public class PaymentsConfiguration {
     public PaymentConsoleLogger paymentConsoleLogger(MessageSource messageSource) {
         return new PaymentConsoleLogger(messageSource);
     }
+
+    @Bean
+    public PaymentStatusChangeListener paymentStatusChangeListener() {
+        return new PaymentStatusChangeListener();
+    }
 }
