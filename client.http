@@ -19,5 +19,5 @@ Accept: application/json
 
 ###
 
-GET http://localhost:8080/api/users?lastNameFragment=Kow
+GET http://localhost:8080/api/users?lastNameFragment=Jon
 Accept: application/json

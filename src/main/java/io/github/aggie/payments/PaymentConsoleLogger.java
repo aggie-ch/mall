@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 
 @Aspect
-@Component
 @Log
 @RequiredArgsConstructor
 public class PaymentConsoleLogger implements Ordered {
